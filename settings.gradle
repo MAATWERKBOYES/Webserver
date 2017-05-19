@@ -1,0 +1,6 @@
+rootProject.name = 'webserver'
+
+include ':domain'
+include ':data'
+include ':logic'
+include ':web'
