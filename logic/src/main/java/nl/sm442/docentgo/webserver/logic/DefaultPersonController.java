@@ -5,6 +5,9 @@ import nl.sm442.docentgo.webserver.data.person.hibernate.PersonHibernateReposito
 import nl.sm442.docentgo.webserver.domain.Person;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author Oscar de Leeuw
@@ -22,7 +25,12 @@ public class DefaultPersonController implements PersonController {
     }
 
     @Override
-    public void updatePersons(Collection<Person> personCollection) {
-        repository.saveAll(personCollection);
+    public void updatePersons(Collection<Person> newData) {
+        Map<String, Person> currentData = repository.getAll()
+                .stream()
+                .collect(Collectors.toMap(Person::getId, Function.identity()));
+
+        newData.forEach(p -> p.setPresent(currentData.get(p.getId()).isPresent()));
+        repository.saveAll(newData);
     }
 }

@@ -25,6 +25,11 @@ public class PersonHibernateRepository extends HibernateRepository<String, Perso
     }
 
     @Override
+    public Collection<Person> getAll() {
+        return findAll();
+    }
+
+    @Override
     protected PersonDAO createDao(EntityManager manager) {
         return new PersonHibernateDAO(manager);
     }

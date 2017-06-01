@@ -10,4 +10,6 @@ import java.util.Collection;
 public interface PersonRepository {
 
     void saveAll(Collection<Person> persons);
+
+    Collection<Person> getAll();
 }
