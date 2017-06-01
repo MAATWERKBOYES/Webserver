@@ -16,7 +16,7 @@ public class DocentGoHttpInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         request.getHeaders().add(HttpHeaders.ACCEPT, "application/json");
-        request.getHeaders().add(HttpHeaders.AUTHORIZATION, TokenHolder.getInstance().getToken());
+        request.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer " + TokenHolder.getInstance().getToken());
         return execution.execute(request, body);
     }
 }
