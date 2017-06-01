@@ -16,7 +16,7 @@ public class LoginWebController {
     private static Logger logger = LoggerFactory.getLogger(LoginWebController.class.getName());
 
 
-    @RequestMapping(name = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void setAccessToken(@RequestParam String token) {
         logger.info("Received setAccessToken request with token: {}", token);

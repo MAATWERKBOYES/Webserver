@@ -12,4 +12,6 @@ public interface PersonRepository {
     void saveAll(Collection<Person> persons);
 
     Collection<Person> getAll();
+
+    void updatePresence(String id, boolean value);
 }

@@ -6,6 +6,7 @@ import nl.sm442.docentgo.webserver.domain.Person;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,15 @@ public class DefaultPersonController implements PersonController {
                 .stream()
                 .collect(Collectors.toMap(Person::getId, Function.identity()));
 
-        newData.forEach(p -> p.setPresent(currentData.get(p.getId()).isPresent()));
+        newData.forEach(p ->
+                Optional.ofNullable(currentData.get(p.getId()))
+                        .ifPresent(a -> p.setPresent(a.isPresent())));
+
         repository.saveAll(newData);
+    }
+
+    @Override
+    public void updatePresence(String id, boolean presence) {
+        repository.updatePresence(id, presence);
     }
 }

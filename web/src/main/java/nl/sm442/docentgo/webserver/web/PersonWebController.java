@@ -6,10 +6,7 @@ import nl.sm442.docentgo.webserver.logic.PersonController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,14 +32,14 @@ public class PersonWebController {
         this.controller = new DefaultPersonController();
     }
 
-    @RequestMapping("/persons")
+    @RequestMapping("/person")
     public @ResponseBody
     Collection<Person> getPersons() {
         //template.setInterceptors(Arrays.asList(new DocentGoHttpInterceptor()));
         logger.info("Handling getPersons request.");
 
         try {
-            return Arrays.asList(template.getForObject("https://api.fhict.nl/people/search/oosterkamp", Person[].class));
+            return Arrays.asList(template.getForObject("https://api.fhict.nl/people/search/oosterkamp", Person[].class)); //TODO NOT API CALL
         } catch (HttpClientErrorException e) {
             logger.warn("Invalid token: {}", TokenHolder.getInstance().getToken());
             logger.info("Response body: {}", e.getResponseBodyAsString());
@@ -51,7 +48,15 @@ public class PersonWebController {
         }
     }
 
-    @RequestMapping("/save")
+    @RequestMapping(value = "/person/{id}/presence", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void setPresence(@PathVariable String id, @RequestParam boolean value) {
+        logger.info("Handling setPresence request for {}", id);
+
+        controller.updatePresence(id, value);
+    }
+
+    @RequestMapping("/person/save")
     @ResponseStatus(HttpStatus.OK)
     public void saveTeachersToDatabase() {
         Long start = System.currentTimeMillis();

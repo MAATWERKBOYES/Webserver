@@ -30,6 +30,18 @@ public class PersonHibernateRepository extends HibernateRepository<String, Perso
     }
 
     @Override
+    public void updatePresence(String id, boolean value) {
+        Function<PersonDAO, Void> function = dao -> {
+            Person person = dao.find(id);
+            person.setPresent(value);
+            dao.edit(person);
+            return null;
+        };
+
+        performTransaction(function);
+    }
+
+    @Override
     protected PersonDAO createDao(EntityManager manager) {
         return new PersonHibernateDAO(manager);
     }
