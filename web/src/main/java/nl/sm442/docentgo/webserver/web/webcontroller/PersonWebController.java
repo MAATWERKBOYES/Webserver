@@ -36,17 +36,16 @@ public class PersonWebController {
     @RequestMapping("/people")
     public @ResponseBody
     Collection<Person> getPersons() {
-        //template.setInterceptors(Arrays.asList(new DocentGoHttpInterceptor()));
         logger.info("Handling getPersons request.");
 
-        try {
-            return controller.getAllPersons();
-        } catch (HttpClientErrorException e) {
-            logger.warn("Invalid token: {}", TokenHolder.getInstance().getToken());
-            logger.info("Response body: {}", e.getResponseBodyAsString());
-            logger.info("Headers: {}", e.getResponseHeaders());
-            throw e;
-        }
+        return controller.getAllPersons();
+    }
+
+    @RequestMapping("/people/me")
+    public Person getMe() {
+        logger.info("Handling getMe request");
+
+        return template.getForObject("https://api.fhict.nl/people/me", Person.class);
     }
 
     @RequestMapping(value = "/people/{id}/presence", method = RequestMethod.POST)
