@@ -5,6 +5,8 @@
     <persistence-unit name="manager">
 
         <class>nl.sm442.docentgo.webserver.domain.Person</class>
+        <class>nl.sm442.docentgo.webserver.domain.Question</class>
+        <class>nl.sm442.docentgo.webserver.domain.Answer</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
