@@ -1,4 +1,4 @@
-package nl.sm442.docentgo.webserver.logic;
+package nl.sm442.docentgo.webserver.logic.person;
 
 import nl.sm442.docentgo.webserver.domain.Person;
 

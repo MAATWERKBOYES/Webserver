@@ -1,8 +1,8 @@
 package nl.sm442.docentgo.webserver.web.webcontroller;
 
 import nl.sm442.docentgo.webserver.domain.Person;
-import nl.sm442.docentgo.webserver.logic.DefaultPersonController;
-import nl.sm442.docentgo.webserver.logic.PersonController;
+import nl.sm442.docentgo.webserver.logic.person.DefaultPersonController;
+import nl.sm442.docentgo.webserver.logic.person.PersonController;
 import nl.sm442.docentgo.webserver.web.token.TokenHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
