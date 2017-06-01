@@ -18,6 +18,7 @@ public class Person {
     private String surName;
     private String initials;
     private String displayName;
+    private String department;
     private String personalTitle;
     private String photo;
     private boolean present;
@@ -60,6 +61,14 @@ public class Person {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getPersonalTitle() {
