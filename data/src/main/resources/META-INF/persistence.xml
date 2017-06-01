@@ -14,7 +14,7 @@
             <property name="hibernate.connection.username" value="sm442"/>
             <property name="hibernate.connection.password" value="sm442"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>
