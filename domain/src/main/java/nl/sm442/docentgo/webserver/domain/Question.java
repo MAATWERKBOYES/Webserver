@@ -2,10 +2,7 @@ package nl.sm442.docentgo.webserver.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -18,7 +15,8 @@ public class Question {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "jnd_ques_ans", joinColumns = @JoinColumn(name = "ques_id"), inverseJoinColumns = @JoinColumn(name = "ans_id"))
     private Collection<Answer> answers;
     private String department; //TODO MAKE ENUM
 
