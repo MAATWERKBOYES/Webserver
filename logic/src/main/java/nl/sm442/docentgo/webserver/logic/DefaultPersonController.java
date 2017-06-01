@@ -42,4 +42,9 @@ public class DefaultPersonController implements PersonController {
     public void updatePresence(String id, boolean presence) {
         repository.updatePresence(id, presence);
     }
+
+    @Override
+    public Collection<Person> getAllPersons() {
+        return repository.getAll();
+    }
 }

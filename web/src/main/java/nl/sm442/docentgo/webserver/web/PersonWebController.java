@@ -32,14 +32,14 @@ public class PersonWebController {
         this.controller = new DefaultPersonController();
     }
 
-    @RequestMapping("/person")
+    @RequestMapping("/people")
     public @ResponseBody
     Collection<Person> getPersons() {
         //template.setInterceptors(Arrays.asList(new DocentGoHttpInterceptor()));
         logger.info("Handling getPersons request.");
 
         try {
-            return Arrays.asList(template.getForObject("https://api.fhict.nl/people/search/oosterkamp", Person[].class)); //TODO NOT API CALL
+            return controller.getAllPersons();
         } catch (HttpClientErrorException e) {
             logger.warn("Invalid token: {}", TokenHolder.getInstance().getToken());
             logger.info("Response body: {}", e.getResponseBodyAsString());
@@ -48,7 +48,7 @@ public class PersonWebController {
         }
     }
 
-    @RequestMapping(value = "/person/{id}/presence", method = RequestMethod.POST)
+    @RequestMapping(value = "/people/{id}/presence", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void setPresence(@PathVariable String id, @RequestParam boolean value) {
         logger.info("Handling setPresence request for {}", id);
@@ -56,7 +56,7 @@ public class PersonWebController {
         controller.updatePresence(id, value);
     }
 
-    @RequestMapping("/person/save")
+    @RequestMapping("/people/save")
     @ResponseStatus(HttpStatus.OK)
     public void saveTeachersToDatabase() {
         Long start = System.currentTimeMillis();

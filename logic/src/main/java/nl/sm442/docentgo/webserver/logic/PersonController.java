@@ -12,4 +12,6 @@ public interface PersonController {
     void updatePersons(Collection<Person> personCollection);
 
     void updatePresence(String id, boolean presence);
+
+    Collection<Person> getAllPersons();
 }
