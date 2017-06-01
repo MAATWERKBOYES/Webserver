@@ -16,9 +16,6 @@ public class LoginController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class.getName());
 
-    public LoginController() {
-
-    }
 
     @RequestMapping("/login")
     public String setAccessToken(@RequestParam String token) {
