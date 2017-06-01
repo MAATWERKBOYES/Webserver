@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import java.util.Collection;
 @CrossOrigin
 public class PersonController {
 
+    private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PersonController.class.getName());
     private RestTemplate template;
 
     @Autowired
@@ -28,6 +30,14 @@ public class PersonController {
     @RequestMapping("/persons")
     public @ResponseBody
     Collection<Person> getPersons() {
-        return Arrays.asList(template.getForObject("https://api.fhict.nl/people/search/oosterkamp", Person[].class));
+        //template.setInterceptors(Arrays.asList(new DocentGoHttpInterceptor()));
+        logger.info("Handling getPersons request.");
+
+        try {
+            return Arrays.asList(template.getForObject("https://api.fhict.nl/people/search/oosterkamp", Person[].class));
+        } catch (HttpClientErrorException e) {
+            logger.warn("Invalid token: {}", TokenHolder.getInstance().getToken(), e);
+            throw e;
+        }
     }
 }
