@@ -45,7 +45,14 @@ public class PersonWebController {
     public Person getMe() {
         logger.info("Handling getMe request");
 
-        return template.getForObject("https://api.fhict.nl/people/me", Person.class);
+        try {
+            return template.getForObject("https://api.fhict.nl/people/me", Person.class);
+        } catch (HttpClientErrorException e) {
+            logger.warn("Response body: {}", e.getResponseBodyAsString());
+            logger.warn("Headers: {}", e.getResponseHeaders());
+            throw e;
+        }
+
     }
 
     @RequestMapping(value = "/people/{id}/presence", method = RequestMethod.POST)
