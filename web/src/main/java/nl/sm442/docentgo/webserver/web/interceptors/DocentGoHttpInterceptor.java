@@ -1,5 +1,6 @@
-package nl.sm442.docentgo.webserver.web;
+package nl.sm442.docentgo.webserver.web.interceptors;
 
+import nl.sm442.docentgo.webserver.web.token.TokenHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;

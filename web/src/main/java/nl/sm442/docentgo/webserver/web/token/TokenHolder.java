@@ -1,4 +1,4 @@
-package nl.sm442.docentgo.webserver.web;
+package nl.sm442.docentgo.webserver.web.token;
 
 import java.util.Collection;
 import java.util.LinkedList;
