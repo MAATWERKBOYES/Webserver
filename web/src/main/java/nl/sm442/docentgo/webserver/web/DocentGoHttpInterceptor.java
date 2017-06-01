@@ -13,12 +13,10 @@ import java.io.IOException;
  */
 public class DocentGoHttpInterceptor implements ClientHttpRequestInterceptor {
 
-    private final static String AUTH_CODE = "";
-
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         request.getHeaders().add(HttpHeaders.ACCEPT, "application/json");
-        request.getHeaders().add(HttpHeaders.AUTHORIZATION, AUTH_CODE);
+        request.getHeaders().add(HttpHeaders.AUTHORIZATION, TokenHolder.getInstance().getToken());
         return execution.execute(request, body);
     }
 }
