@@ -2,12 +2,17 @@ package nl.sm442.docentgo.webserver.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * @author Oscar de Leeuw
  */
+@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
 
+    @Id
     private String id;
     private String givenName;
     private String surName;
