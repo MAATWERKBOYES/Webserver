@@ -101,7 +101,7 @@ public abstract class HibernateRepository<I, T, D extends DAO<I, T>> {
      * @param <R>      The return type of the given {@code function}.
      * @return An object fetched from the database, conform the requested type ({@code <R>}).
      */
-    protected <R> R performTransaction(Function<D, R> function) {
+    protected synchronized <R> R performTransaction(Function<D, R> function) {
         try {
             beginTransaction();
 
