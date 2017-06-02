@@ -1,5 +1,6 @@
-package nl.sm442.docentgo.webserver.web;
+package nl.sm442.docentgo.webserver.web.interceptors;
 
+import nl.sm442.docentgo.webserver.web.token.TokenHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -13,12 +14,10 @@ import java.io.IOException;
  */
 public class DocentGoHttpInterceptor implements ClientHttpRequestInterceptor {
 
-    private final static String AUTH_CODE = "";
-
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         request.getHeaders().add(HttpHeaders.ACCEPT, "application/json");
-        request.getHeaders().add(HttpHeaders.AUTHORIZATION, AUTH_CODE);
+        request.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer " + TokenHolder.getInstance().getToken());
         return execution.execute(request, body);
     }
 }
