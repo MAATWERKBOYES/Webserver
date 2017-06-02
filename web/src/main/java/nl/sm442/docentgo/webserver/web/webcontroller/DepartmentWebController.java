@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
 
@@ -25,7 +26,8 @@ public class DepartmentWebController {
     }
 
     @RequestMapping("/department")
-    public Collection<String> getAllDepartments() {
+    public @ResponseBody
+    Collection<String> getAllDepartments() {
         logger.info("Handling getAllDepartments request.");
 
         return controller.getAllDepartments();
