@@ -19,7 +19,7 @@ public class Question {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "jnd_ques_ans", joinColumns = @JoinColumn(name = "ques_id"), inverseJoinColumns = @JoinColumn(name = "ans_id"))
     private Collection<Answer> answers;
-    private String department; //TODO MAKE ENUM
+    private Department department;
 
     public Long getId() {
         return id;
@@ -46,10 +46,10 @@ public class Question {
     }
 
     public String getDepartment() {
-        return department;
+        return department.toString();
     }
 
     public void setDepartment(String department) {
-        this.department = department;
+        this.department = Department.fromString(department);
     }
 }
