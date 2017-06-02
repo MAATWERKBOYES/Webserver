@@ -43,7 +43,7 @@ public class UserWebController {
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void saveUser(User user) {
+    public void saveUser(@RequestBody User user) {
         logger.info("Handling saveUser request for imei: {}.", user.getImei());
 
         controller.save(user);
