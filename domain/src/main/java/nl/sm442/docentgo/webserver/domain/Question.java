@@ -16,7 +16,7 @@ public class Question {
     @GeneratedValue
     private Long id;
     private String value;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(name = "jnd_ques_ans", joinColumns = @JoinColumn(name = "ques_id"), inverseJoinColumns = @JoinColumn(name = "ans_id"))
     private Collection<Answer> answers;
     private Department department;
