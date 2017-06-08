@@ -18,6 +18,9 @@ public class User implements Serializable {
 
     @Id
     private String imei;
+
+    private String name;
+
     @OneToMany(mappedBy = "fk.user")
     private Collection<PersonEntry> teachers;
 
@@ -27,6 +30,14 @@ public class User implements Serializable {
 
     public void setImei(String imei) {
         this.imei = imei;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Collection<PersonEntry> getTeachers() {
