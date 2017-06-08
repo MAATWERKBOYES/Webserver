@@ -7,6 +7,7 @@ import nl.sm442.docentgo.webserver.domain.Question;
 
 import javax.persistence.EntityManager;
 import java.util.Collection;
+import java.util.function.Function;
 
 /**
  * @author Oscar de Leeuw
@@ -30,5 +31,15 @@ public class QuestionHibernateRepository extends HibernateRepository<Long, Quest
     @Override
     public void save(Question question) {
         edit(question);
+    }
+
+    @Override
+    public void remove(Long id) {
+        Function<QuestionDAO, Void> removeFunction = dao -> {
+            dao.remove(id);
+            return null;
+        };
+
+        super.performTransaction(removeFunction);
     }
 }

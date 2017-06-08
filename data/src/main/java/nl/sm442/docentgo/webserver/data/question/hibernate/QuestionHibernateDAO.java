@@ -18,4 +18,10 @@ public class QuestionHibernateDAO extends HibernateDAO<Long, Question> implement
     protected QuestionHibernateDAO(EntityManager entityManager) {
         super(entityManager, Question.class);
     }
+
+    @Override
+    public void remove(Long id) {
+        Question question = find(id);
+        remove(question);
+    }
 }

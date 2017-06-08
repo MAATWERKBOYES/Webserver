@@ -35,4 +35,9 @@ public class DefaultQuestionController implements QuestionController {
     public void save(Question question) {
         repository.save(question);
     }
+
+    @Override
+    public void remove(Long id) {
+        repository.remove(id);
+    }
 }

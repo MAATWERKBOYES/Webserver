@@ -7,4 +7,7 @@ import nl.sm442.docentgo.webserver.domain.Question;
  * @author Oscar de Leeuw
  */
 public interface QuestionDAO extends DAO<Long, Question> {
+
+    void remove(Long id);
+
 }

@@ -14,4 +14,6 @@ public interface QuestionController {
     Question get(Long id);
 
     void save(Question question);
+
+    void remove(Long id);
 }

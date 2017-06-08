@@ -45,4 +45,11 @@ public class QuestionWebController {
         logger.info("Handling saveQuestion request.");
         controller.save(question);
     }
+
+    @RequestMapping(value = "/question/{id}/remove", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void removeQuestion(@PathVariable Long id) {
+        logger.info("Handling removeQuestion request with id: {}", id);
+        controller.remove(id);
+    }
 }
