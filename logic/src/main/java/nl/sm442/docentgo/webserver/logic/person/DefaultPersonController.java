@@ -47,4 +47,9 @@ public class DefaultPersonController implements PersonController {
     public Collection<Person> getAllPersons() {
         return repository.getAll();
     }
+
+    @Override
+    public Person getPersonByAbbreviation(String abbreviation) {
+        return repository.getPersonByAbbreviation(abbreviation);
+    }
 }

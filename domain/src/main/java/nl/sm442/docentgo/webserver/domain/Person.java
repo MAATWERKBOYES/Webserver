@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,9 @@ import java.io.Serializable;
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NamedQueries(
+        value = @NamedQuery(name = "Person.getPersonByAbbreviation", query = "SELECT p FROM Person p WHERE p.personalTitle = :abbreviation")
+)
 public class Person implements Serializable {
 
     @Id

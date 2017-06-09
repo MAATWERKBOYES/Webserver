@@ -14,4 +14,6 @@ public interface PersonController {
     void updatePresence(String id, boolean presence);
 
     Collection<Person> getAllPersons();
+
+    Person getPersonByAbbreviation(String abbreviation);
 }

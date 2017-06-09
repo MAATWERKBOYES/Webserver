@@ -13,5 +13,7 @@ public interface PersonRepository {
 
     Collection<Person> getAll();
 
+    Person getPersonByAbbreviation(String abbreviation);
+
     void updatePresence(String id, boolean value);
 }

@@ -41,6 +41,14 @@ public class PersonWebController {
         return controller.getAllPersons();
     }
 
+    @RequestMapping("/people/{abbreviation}")
+    public @ResponseBody
+    Person getPersonByAbbreviation(@PathVariable String abbreviation) {
+        logger.info("Handling getPersonByAbbreviation request with abbreviation: {}.", abbreviation);
+
+        return controller.getPersonByAbbreviation(abbreviation);
+    }
+
     @RequestMapping("/people/me")
     public Person getMe() {
         logger.info("Handling getMe request");

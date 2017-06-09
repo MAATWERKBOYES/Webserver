@@ -30,6 +30,12 @@ public class PersonHibernateRepository extends HibernateRepository<String, Perso
     }
 
     @Override
+    public Person getPersonByAbbreviation(String abbreviation) {
+        Function<PersonDAO, Person> function = dao -> dao.findByAbbreviation(abbreviation);
+        return performTransaction(function);
+    }
+
+    @Override
     public void updatePresence(String id, boolean value) {
         Function<PersonDAO, Void> function = dao -> {
             Person person = dao.find(id);
