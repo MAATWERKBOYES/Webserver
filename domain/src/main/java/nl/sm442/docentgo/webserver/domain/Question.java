@@ -10,6 +10,12 @@ import java.util.Collection;
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NamedQueries(
+        value = {
+                @NamedQuery(name = "Question.getQuestionForDepartment", query = "SELECT q FROM Question q WHERE q.department = :department"),
+                @NamedQuery(name = "Question.getAmountOfQuestionsForDepartment", query = "SELECT COUNT(*) FROM Question q WHERE q.department = :department")
+        }
+)
 public class Question {
 
     @Id

@@ -1,5 +1,6 @@
 package nl.sm442.docentgo.webserver.web.webcontroller;
 
+import nl.sm442.docentgo.webserver.domain.Department;
 import nl.sm442.docentgo.webserver.domain.Question;
 import nl.sm442.docentgo.webserver.logic.question.DefaultQuestionController;
 import nl.sm442.docentgo.webserver.logic.question.QuestionController;
@@ -37,6 +38,14 @@ public class QuestionWebController {
     Question getQuestion(@PathVariable Long id) {
         logger.info("Handling getQuestion request with id: {}.", id);
         return controller.get(id);
+    }
+
+    @RequestMapping("/question/department/{department}")
+    public @ResponseBody
+    Question getQuestionForDepartment(@PathVariable String department) {
+        logger.info("Handling getQuestionForDepartment with department: {}.", department);
+
+        return controller.getQuestionForDepartment(Department.fromString(department));
     }
 
     @RequestMapping(value = "/question", method = RequestMethod.POST)

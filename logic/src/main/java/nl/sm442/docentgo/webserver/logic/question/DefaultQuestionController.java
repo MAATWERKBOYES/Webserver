@@ -2,6 +2,7 @@ package nl.sm442.docentgo.webserver.logic.question;
 
 import nl.sm442.docentgo.webserver.data.question.QuestionRepository;
 import nl.sm442.docentgo.webserver.data.question.hibernate.QuestionHibernateRepository;
+import nl.sm442.docentgo.webserver.domain.Department;
 import nl.sm442.docentgo.webserver.domain.Question;
 
 import java.util.Collection;
@@ -29,6 +30,11 @@ public class DefaultQuestionController implements QuestionController {
     @Override
     public Question get(Long id) {
         return repository.get(id);
+    }
+
+    @Override
+    public Question getQuestionForDepartment(Department department) {
+        return repository.getQuestionForDepartment(department);
     }
 
     @Override
