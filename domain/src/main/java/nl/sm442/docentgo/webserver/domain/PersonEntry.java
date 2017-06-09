@@ -1,5 +1,7 @@
 package nl.sm442.docentgo.webserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -36,6 +38,7 @@ public class PersonEntry {
     }
 
     @Transient
+    @JsonIgnore
     public User getUser() {
         return getFk().getUser();
     }
@@ -51,7 +54,6 @@ public class PersonEntry {
     public void setLevel(int level) {
         this.level = level;
     }
-
 
     @Embeddable
     public static class PersonEntryFk implements Serializable {

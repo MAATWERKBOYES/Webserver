@@ -1,10 +1,12 @@
 package nl.sm442.docentgo.webserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * @author Oscar de Leeuw
@@ -21,8 +23,9 @@ public class User implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "fk.user")
-    private Collection<PersonEntry> teachers;
+    @OneToMany(mappedBy = "fk.user", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Collection<PersonEntry> teachers = new LinkedList<>();
 
     public String getImei() {
         return imei;
