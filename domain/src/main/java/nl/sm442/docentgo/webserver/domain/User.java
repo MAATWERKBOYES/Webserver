@@ -1,7 +1,7 @@
 package nl.sm442.docentgo.webserver.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,7 +24,7 @@ public class User implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "fk.user", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<PersonEntry> teachers = new LinkedList<>();
 
     public String getImei() {

@@ -1,5 +1,6 @@
 package nl.sm442.docentgo.webserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class PersonEntry {
     private PersonEntryFk fk = new PersonEntryFk();
     private int level;
 
+    @JsonIgnore
     public PersonEntryFk getFk() {
         return fk;
     }
@@ -38,7 +40,7 @@ public class PersonEntry {
     }
 
     @Transient
-    @JsonIgnore
+    @JsonBackReference
     public User getUser() {
         return getFk().getUser();
     }
