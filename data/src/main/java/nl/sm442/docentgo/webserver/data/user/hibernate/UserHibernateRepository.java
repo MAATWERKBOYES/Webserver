@@ -4,10 +4,13 @@ import nl.sm442.docentgo.webserver.data.repository.HibernateRepository;
 import nl.sm442.docentgo.webserver.data.user.UserDAO;
 import nl.sm442.docentgo.webserver.data.user.UserRepository;
 import nl.sm442.docentgo.webserver.domain.Person;
+import nl.sm442.docentgo.webserver.domain.PersonEntry;
 import nl.sm442.docentgo.webserver.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -39,7 +42,18 @@ public class UserHibernateRepository extends HibernateRepository<String, User, U
         Function<UserDAO, Void> function = dao -> {
             User user = dao.find(userId);
             Person person = dao.getPerson(personId);
-            user.addPerson(person);
+
+            Optional<PersonEntry> entry = user.getTeachers()
+                    .stream()
+                    .filter(e -> Objects.equals(e.getPerson().getId(), personId))
+                    .findFirst();
+
+            if (entry.isPresent()) {
+                PersonEntry value = entry.get();
+                value.setLevel(value.getLevel() + 1);
+            } else {
+                user.addPerson(person);
+            }
 
             dao.edit(user);
             return null;
