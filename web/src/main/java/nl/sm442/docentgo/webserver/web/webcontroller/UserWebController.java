@@ -1,5 +1,7 @@
 package nl.sm442.docentgo.webserver.web.webcontroller;
 
+import nl.sm442.docentgo.webserver.domain.PersonEntry;
+import nl.sm442.docentgo.webserver.domain.RankEntry;
 import nl.sm442.docentgo.webserver.domain.User;
 import nl.sm442.docentgo.webserver.logic.user.DefaultUserController;
 import nl.sm442.docentgo.webserver.logic.user.UserController;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Oscar de Leeuw
@@ -33,10 +37,32 @@ public class UserWebController {
         return controller.getAll();
     }
 
+    @RequestMapping("/user/ranking")
+    public @ResponseBody
+    Collection<RankEntry> getUserRanking() {
+        logger.info("Handling ranking request");
+
+        List<RankEntry> data = new LinkedList<>();
+
+        Collection<User> users = controller.getAll();
+        for (User user : users) {
+            double ranking = 0;
+
+            Collection<PersonEntry> people = user.getTeachers();
+            for (PersonEntry person : people) {
+                ranking += 9.33 * person.getLevel() * 4.76;
+            }
+
+            data.add(new RankEntry(user.getName(), ranking));
+        }
+
+        return data;
+    }
+
     @RequestMapping("/user/{imei}")
     public @ResponseBody
     User getUser(@PathVariable String imei) {
-        logger.info("Handling getUser request with imei: {}", imei);
+        logger.info("Handling getUsername request with imei: {}", imei);
 
         return controller.get(imei);
     }
